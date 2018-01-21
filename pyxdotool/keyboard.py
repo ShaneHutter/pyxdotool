@@ -35,51 +35,56 @@ KEY_COMMAND = 'xdotool key --delay 1 '
 
 def xdotoolKey( key = '' ):
     """Retun an xdotool key name from an ascii key"""
-
-    # Dictionary of char to xdotool key
-    xdotoolKeys = {
-        '@':    'at' ,
-        '&':    'ampersand' ,
-        '^':    'asciicircum' , # Caret
-        '~':    'asciitilde' ,
-        '*':    'asterisk' ,
-        '\\':   'backslash' ,
-        '\b':   'BackSpace' ,
-        '|':    'bar' ,         # Pipe
-        '{':    'braceleft' ,
-        '}':    'braceright' ,
-        '[':    'bracketleft' ,
-        ']':    'bracketright' ,
-        ',':    'comma' ,
-        ':':    'colon' ,
-        '$':    'dollar' ,
-        '=':    'equal' ,
-        '!':    'exclam' ,
-        '>':    'greater' ,
-        '<':    'less' ,
-        '-':    'minus' ,
-        '#':    'numbersign' ,
-        '(':    'parenleft' ,
-        ')':    'parenright' ,
-        '%':    'percent' ,
-        '.':    'period' ,
-        '+':    'plus' ,
-        '?':    'question' ,
-        '\"':   'quotedbl' ,
-        '\'':   'quoteright' ,
-        '`':    'quoteleft' ,   # Backtick
-        '\n':   'Return' ,
-        ';':    'semicolon' ,
-        '/':    'slash' ,
-        ' ':    'space' ,
-        '\t':   'Tab' ,
-        '_':    'underscore' ,
+    
+    xdotoolKeys = {}
+    if len(key) == len(key[0]):
+        # Dictionary of char to xdotool key
+        xdotoolKeys = {
+            '@':    'at' ,
+            '&':    'ampersand' ,
+            '^':    'asciicircum' , # Caret
+            '~':    'asciitilde' ,
+            '*':    'asterisk' ,
+            '\\':   'backslash' ,
+            '\b':   'BackSpace' ,
+            '|':    'bar' ,         # Pipe
+            '{':    'braceleft' ,
+            '}':    'braceright' ,
+            '[':    'bracketleft' ,
+            ']':    'bracketright' ,
+            ',':    'comma' ,
+            ':':    'colon' ,
+            '$':    'dollar' ,
+            '=':    'equal' ,
+            '!':    'exclam' ,
+            '>':    'greater' ,
+            '<':    'less' ,
+            '-':    'minus' ,
+            '#':    'numbersign' ,
+            '(':    'parenleft' ,
+            ')':    'parenright' ,
+            '%':    'percent' ,
+            '.':    'period' ,
+            '+':    'plus' ,
+            '?':    'question' ,
+            '\"':   'quotedbl' ,
+            '\'':   'quoteright' ,
+            '`':    'quoteleft' ,   # Backtick
+            '\n':   'Return' ,
+            ';':    'semicolon' ,
+            '/':    'slash' ,
+            ' ':    'space' ,
+            '\t':   'Tab' ,
+            '_':    'underscore' ,
         }
 
-    if key in xdotoolKeys:
-        return xdotoolKeys[key]
+    if len(key) == len(key[0]):
+        if key in xdotoolKeys:
+            return xdotoolKeys[key]
+        else:
+            return key
     else:
-        return key
+        return ''
 
 
 
