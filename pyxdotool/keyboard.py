@@ -146,6 +146,9 @@ def typeKeys( keyString = "" ):
 '''
 
 
+
+### ----- F Key Methods --------------------------------------
+
 def typeFKey( fKeyNumber = 0 ):
     """ Use xdotool to press an F key """
     
@@ -202,13 +205,84 @@ def metaFKey( fKeyNumber = 0 ):
 
 
 def superFKey( fKeyNumber = 0 ):
+    """ Use xdotool to combine the Super key with an F key. """
     pass
     return
 
 
 
+### ------------------------------------------------------------------
+
+
+
+### ----- Alt key methods --------------------------------------------
+
+def typeAltKey( amount = 1 ):
+    """ Use xdotool to type the alt key a certain amount of times. """
+    pass
+    return
+
+
+
+def holdAltKey():
+    """ Use xdotool to hold down the alt key. """
+    pass
+    return
+
+
+
+def releaseAltKey():
+    """ Use xdotool to release the alt key. """
+    pass
+    return
+
+
+
+def combineAltKey( key = '' ):
+    """ Use xdotool to combine the alt key with other keys. """
+    pass
+    return
+
+### ------------------------------------------------------------------
+
+
+
+### ----- Ctrl key methods -------------------------------------------
+
+def typeCtrlKey( amount = 1 ):
+    """ Use xdotool to type the ctrl key a certain amount of times. """
+    pass
+    return
+
+
+
+def holdCtrlKey():
+    """ Use xdotool to hold down the ctrl key. """
+    pass
+    return
+
+
+
+def releaseCtrlKey():
+    """ Use xdotool to release the ctrl key. """
+    pass
+    return
+
+
+
+def combineCtrlKey( key = '' ):
+    """ Use xdotool to combine the ctrl key with other keys. """
+    pass
+    return
+
+### ------------------------------------------------------------------
+
+
+
+### ----- Enter Key Methods ------------------------------------------
+
 def typeEnterKey( amount = 1 ):
-    """ Use xdotool to press the Enter key a certain amount of times. """
+    """ Use xdotool to press the enter key a certain amount of times. """
     
     enterKeyPresses = []
     for loop in range(amount):
@@ -236,3 +310,68 @@ def releaseEnterKey():
     pass
     return
 
+### -----------------------------------------------------------------------
+
+
+
+### ----- Meta key methods ------------------------------------------------
+
+def typeMetaKey( amount = 1 ):
+    """ Use xdotool to type the meta key a certain amount of times. """
+    pass
+    return
+
+
+
+def holdMetaKey():
+    """ Use xdotool to hold down the meta key. """
+    pass
+    return
+
+
+
+def releaseMetalKey():
+    """ Use xdotool to release the meta key. """
+    pass
+    return
+
+
+
+def combineMetaKey(key = '' ):
+    """ Use xdotool to combine the meta key with other keys. """
+    pass
+    return
+
+### -----------------------------------------------------------------------
+
+
+
+### ----- Super key methods -----------------------------------------------
+
+def typeSuperKey( amount = 1 ):
+    """ Use xdotool to type the super key a certain amount of times. """
+    pass
+    return
+
+
+
+def holdSuperKey():
+    """ Use xdotool to hold down the super key. """
+    pass
+    return
+
+
+
+def releaseSuperKey():
+    """ Use xdotool to release the super key. """
+    pass
+    return
+
+
+
+def combineSuperKey( key = '' ):
+    """ Use xdotool to combine the super key with other keys. """
+    pass
+    return
+
+### -----------------------------------------------------------------------
