@@ -201,21 +201,15 @@ keyActions = [
         'combine' ,
         ]
 
-# Combinations for F keys
-fKeyCombine = [
-        'alt' ,
-        'ctrl' ,
-        'meta' ,
-        'super' ,
-        ]
-
-
+#  Automatically build functions for special keys
 for function in specialKeys:
     '''
         Notes:
             Combinations of special keys should be possible
                 i.e. 
                     xdotool key ctrl+alt+Delete
+            Maybe use functions that take a list of special key names (and regular keys)
+                Hold key combo, release key combo, type key combo (press combo once)
 
             xdotool keydown Return
                 Doesn't seem to hold the enter key down
@@ -434,5 +428,3 @@ def superFKey( fKeyNumber = 0 ):
 
 
 ### ------------------------------------------------------------------
-
-
