@@ -181,16 +181,16 @@ MAXIMUM_FKEY_NUMBER = 12
 specialKeys = {
         'Alt':      'alt' ,
         'Ctrl':     'ctrl' ,
-        'Enter':    'Return' ,
-        'Super':    'super' ,
-        'Meta':     'meta' ,
-        }
-
-arrowKeys = {
-        'Right':    'Right' ,
-        'Left':     'Left' ,
-        'Up':       'Up' ,
+        'Delete':   'Delete' ,
         'Down':     'Down' ,
+        'End':      'End' ,
+        'Enter':    'Return' ,
+        'Home':     'Home' ,
+        'Left':     'Left' ,
+        'Meta':     'meta' ,
+        'Right':    'Right' ,
+        'Super':    'super' ,
+        'Up':       'Up' ,
         }
 
 # Key actions list
@@ -213,6 +213,10 @@ fKeyCombine = [
 for function in specialKeys:
     '''
         Notes:
+            Combinations of special keys should be possible
+                i.e. 
+                    xdotool key ctrl+alt+Delete
+
             xdotool keydown Return
                 Doesn't seem to hold the enter key down
 
