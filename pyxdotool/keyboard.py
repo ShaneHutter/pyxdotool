@@ -211,7 +211,14 @@ fKeyCombine = [
 
 
 for function in specialKeys:
-    ### Dont forget to build function description with triple "
+    '''
+        Notes:
+            xdotool keydown Return
+                Doesn't seem to hold the enter key down
+
+            xdotool key super+[key]
+                Sometimes only types the key, instead of the super+key combo
+    '''
 
     # Build and execute typeKey function
     buildFunction = ''
@@ -220,7 +227,8 @@ for function in specialKeys:
     buildFunction += '  keyTyped = []\n'
     buildFunction += '  for press in range(amount):\n'
     buildFunction += '      keyTyped.append(\n'
-    buildFunction += '          shell(KEY_COMMAND + \n'
+    buildFunction += '          shell(\n'
+    buildFunction += '              KEY_COMMAND + \n'
     buildFunction += '              "' + specialKeys[function] + '"\n'
     buildFunction += '              )\n'
     buildFunction += '          )\n'
@@ -231,17 +239,34 @@ for function in specialKeys:
     exec(buildFunction)
 
     # Build and execute holdKey functions
+    buildFunction = ''
+    buildFunction += 'def hold' + function + 'Key():\n'
+    buildFunction += '  """ Hold down the ' + function + ' Key. """\n'
+    buildFunction += '  return shell(\n'
+    buildFunction += '      KEY_DOWN_COMMAND + \n'
+    buildFunction += '      "' + specialKeys[function] + '"\n'
+    buildFunction += '      )\n'
+    exec(buildFunction)
 
     # Build and execute releaseKey functions
+    buildFunction = ''
+    buildFunction += 'def release' + function + 'Key():\n'
+    buildFunction += '  """ Release the ' + function + ' Key. """\n'
+    buildFunction += '  return shell(\n'
+    buildFunction += '      KEY_UP_COMMAND + \n'
+    buildFunction += '      "' + specialKeys[function] + '"\n'
+    buildFunction += '      )\n'
+    exec(buildFunction)
 
     # Build and execute combineKey functions
     buildFunction = ''
     buildFunction += 'def combine' + function + 'Key( key = "" ):\n'
-    buildFunction += '  """ Combine the ' + function + ' key with another key"""\n'
-    buildFunction += '  return shell(KEY_COMMAND + \n'
-    buildFunction += '              "' + specialKeys[function] + '+" + \n'
-    buildFunction += '              key\n'
-    buildFunction += '              )\n'
+    buildFunction += '  """ Combine the ' + function + ' key with another key. """\n'
+    buildFunction += '  return shell(\n'
+    buildFunction += '      KEY_COMMAND + \n'
+    buildFunction += '      "' + specialKeys[function] + '+" + \n'
+    buildFunction += '      key\n'
+    buildFunction += '      )\n'
     exec(buildFunction)
 
 
