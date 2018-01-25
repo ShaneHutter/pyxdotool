@@ -30,6 +30,8 @@ from . import shell
 
 # Declare constants
 KEY_COMMAND = 'xdotool key --delay 1 '
+KEY_DOWN_COMMAND = 'xdotool keydown '
+KEY_UP_COMMAND = 'xdotool keyup '
 
 
 
@@ -141,9 +143,108 @@ def typeKeys( keyString = "" ):
         releaseSuperKey
         combineSuperKey( key = '' )
 
+	typeUpKey( amount = 1 )
+	holdUpKey()
+	releaseUpKey()
 
-        etc...
+	typeDownKey( amount = 1 )
+	holdDownKey()
+	releaseDownKey()
+
+	typeLeftKey( amount = 1 )
+	holdLeftKey()
+	releaseLeftKey()
+
+	typeRightKey( amount = 1 )
+	holdRightKey()
+	releaseRightKey()
+
 '''
+
+
+'''
+    It may be a better idea to build these functions by iterating through
+        a list of actons (type, hold, release), and the key (ctrl, alt, super...)
+        because much of the code in the methods are very similar, except for 
+        a few lines.
+
+    F key functions should be built seperately
+'''
+
+## Build special key functions
+
+# Special key constants
+MINIMUM_FKEY_NUMBER = 1
+MAXIMUM_FKEY_NUMBER = 12
+
+# Special keys Function name to xdotool command
+specialKeys = {
+        'Alt':      'alt' ,
+        'Ctrl':     'ctrl' ,
+        'Enter':    'Return' ,
+        'Super':    'super' ,
+        'Meta':     'meta' ,
+        }
+
+arrowKeys = {
+        'Right':    'Right' ,
+        'Left':     'Left' ,
+        'Up':       'Up' ,
+        'Down':     'Down' ,
+        }
+
+# Key actions list
+keyActions = [ 
+        'type' ,
+        'hold' ,
+        'release' ,
+        'combine' ,
+        ]
+
+# Combinations for F keys
+fKeyCombine = [
+        'alt' ,
+        'ctrl' ,
+        'meta' ,
+        'super' ,
+        ]
+
+
+for function in specialKeys:
+    ### Dont forget to build function description with triple "
+
+    # Build and execute typeKey function
+    buildFunction = ''
+    buildFunction += 'def type' + function + 'Key( amount = 1 ):\n'
+    buildFunction += '  """ Type the ' + function + ' key a certain amount of times. """\n'
+    buildFunction += '  keyTyped = []\n'
+    buildFunction += '  for press in range(amount):\n'
+    buildFunction += '      keyTyped.append(\n'
+    buildFunction += '          shell(KEY_COMMAND + \n'
+    buildFunction += '              "' + specialKeys[function] + '"\n'
+    buildFunction += '              )\n'
+    buildFunction += '          )\n'
+    buildFunction += '  if False in keyTyped:\n'
+    buildFunction += '      return False\n'
+    buildFunction += '  else:\n'
+    buildFunction += '      return True\n'
+    exec(buildFunction)
+
+    # Build and execute holdKey functions
+
+    # Build and execute releaseKey functions
+
+    # Build and execute combineKey functions
+    buildFunction = ''
+    buildFunction += 'def combine' + function + 'Key( key = "" ):\n'
+    buildFunction += '  """ Combine the ' + function + ' key with another key"""\n'
+    buildFunction += '  return shell(KEY_COMMAND + \n'
+    buildFunction += '              "' + specialKeys[function] + '+" + \n'
+    buildFunction += '              key\n'
+    buildFunction += '              )\n'
+    exec(buildFunction)
+
+
 
 
 
@@ -152,8 +253,6 @@ def typeKeys( keyString = "" ):
 def typeFKey( fKeyNumber = 0 ):
     """ Use xdotool to press an F key """
     
-    MINIMUM_FKEY_NUMBER = 1
-    MAXIMUM_FKEY_NUMBER = 12
     
     if fKeyNumber in range(
             MINIMUM_FKEY_NUMBER, 
@@ -171,6 +270,21 @@ def typeFKey( fKeyNumber = 0 ):
 
 def holdFKey( fKeyNumber = 0 ):
     """ Use xdotool to hold an F key. """
+    
+    MINIMUM_FKEY_NUMBER = 1
+    MAXIMUM_FKEY_NUMBER = 12
+    
+    if fKeyNumber in range(
+            MINIMUM_FKEY_NUMBER, 
+            MAXIMUM_FKEY_NUMBER, 
+            ):
+        return shell(
+                KEY_DOWN_COMMAND +
+                'F' +
+                str(fKeyNumber)
+                )
+    else:
+        return False
     pass
     return
 
@@ -178,6 +292,21 @@ def holdFKey( fKeyNumber = 0 ):
 
 def releaseFKey( fKeyNumber = 0 ):
     """ Use xdotool to release an F key. """
+    
+    MINIMUM_FKEY_NUMBER = 1
+    MAXIMUM_FKEY_NUMBER = 12
+    
+    if fKeyNumber in range(
+            MINIMUM_FKEY_NUMBER, 
+            MAXIMUM_FKEY_NUMBER, 
+            ):
+        return shell(
+                KEY_UP_COMMAND +
+                'F' +
+                str(fKeyNumber)
+                )
+    else:
+        return False
     pass
     return
 
@@ -185,6 +314,22 @@ def releaseFKey( fKeyNumber = 0 ):
 
 def altFKey( fKeyNumber = 0 ):
     """ Use xdotool to combine the ALT key with an F key. """
+    
+    MINIMUM_FKEY_NUMBER = 1
+    MAXIMUM_FKEY_NUMBER = 12
+    
+    if fKeyNumber in range(
+            MINIMUM_FKEY_NUMBER, 
+            MAXIMUM_FKEY_NUMBER, 
+            ):
+        return shell(
+                KEY_COMMAND +
+                'alt+' +
+                'F' +
+                str(fKeyNumber)
+                )
+    else:
+        return False
     pass
     return
 
@@ -192,6 +337,22 @@ def altFKey( fKeyNumber = 0 ):
 
 def ctrlFKey( fKeyNumber = 0 ):
     """ Use xdotool to combine the CTRL key with an F key. """
+    
+    MINIMUM_FKEY_NUMBER = 1
+    MAXIMUM_FKEY_NUMBER = 12
+    
+    if fKeyNumber in range(
+            MINIMUM_FKEY_NUMBER, 
+            MAXIMUM_FKEY_NUMBER, 
+            ):
+        return shell(
+                KEY_COMMAND +
+                'ctrl+' +
+                'F' +
+                str(fKeyNumber)
+                )
+    else:
+        return False
     pass
     return
 
@@ -199,6 +360,22 @@ def ctrlFKey( fKeyNumber = 0 ):
 
 def metaFKey( fKeyNumber = 0 ):
     """ Use xdotool to combine the Meta key with an F key """
+    
+    MINIMUM_FKEY_NUMBER = 1
+    MAXIMUM_FKEY_NUMBER = 12
+    
+    if fKeyNumber in range(
+            MINIMUM_FKEY_NUMBER, 
+            MAXIMUM_FKEY_NUMBER, 
+            ):
+        return shell(
+                KEY_COMMAND +
+                'meta+' +
+                'F' +
+                str(fKeyNumber)
+                )
+    else:
+        return False
     pass
     return
 
@@ -206,172 +383,27 @@ def metaFKey( fKeyNumber = 0 ):
 
 def superFKey( fKeyNumber = 0 ):
     """ Use xdotool to combine the Super key with an F key. """
-    pass
-    return
-
-
-
-### ------------------------------------------------------------------
-
-
-
-### ----- Alt key methods --------------------------------------------
-
-def typeAltKey( amount = 1 ):
-    """ Use xdotool to type the alt key a certain amount of times. """
-    pass
-    return
-
-
-
-def holdAltKey():
-    """ Use xdotool to hold down the alt key. """
-    pass
-    return
-
-
-
-def releaseAltKey():
-    """ Use xdotool to release the alt key. """
-    pass
-    return
-
-
-
-def combineAltKey( key = '' ):
-    """ Use xdotool to combine the alt key with other keys. """
-    pass
-    return
-
-### ------------------------------------------------------------------
-
-
-
-### ----- Ctrl key methods -------------------------------------------
-
-def typeCtrlKey( amount = 1 ):
-    """ Use xdotool to type the ctrl key a certain amount of times. """
-    pass
-    return
-
-
-
-def holdCtrlKey():
-    """ Use xdotool to hold down the ctrl key. """
-    pass
-    return
-
-
-
-def releaseCtrlKey():
-    """ Use xdotool to release the ctrl key. """
-    pass
-    return
-
-
-
-def combineCtrlKey( key = '' ):
-    """ Use xdotool to combine the ctrl key with other keys. """
-    pass
-    return
-
-### ------------------------------------------------------------------
-
-
-
-### ----- Enter Key Methods ------------------------------------------
-
-def typeEnterKey( amount = 1 ):
-    """ Use xdotool to press the enter key a certain amount of times. """
     
-    enterKeyPresses = []
-    for loop in range(amount):
-        enterKeyPresses.append(
-                shell(
-                    KEY_COMMAND +
-                    'Return'
-                    )
+    MINIMUM_FKEY_NUMBER = 1
+    MAXIMUM_FKEY_NUMBER = 12
+    
+    if fKeyNumber in range(
+            MINIMUM_FKEY_NUMBER, 
+            MAXIMUM_FKEY_NUMBER, 
+            ):
+        return shell(
+                KEY_COMMAND +
+                'super+' +
+                'F' +
+                str(fKeyNumber)
                 )
-    
-    if False in enterKeyPresses:
-        return False
     else:
-        return True
-
-
-
-def holdEnterKey():
+        return False
     pass
     return
 
 
 
-def releaseEnterKey():
-    pass
-    return
-
-### -----------------------------------------------------------------------
+### ------------------------------------------------------------------
 
 
-
-### ----- Meta key methods ------------------------------------------------
-
-def typeMetaKey( amount = 1 ):
-    """ Use xdotool to type the meta key a certain amount of times. """
-    pass
-    return
-
-
-
-def holdMetaKey():
-    """ Use xdotool to hold down the meta key. """
-    pass
-    return
-
-
-
-def releaseMetalKey():
-    """ Use xdotool to release the meta key. """
-    pass
-    return
-
-
-
-def combineMetaKey(key = '' ):
-    """ Use xdotool to combine the meta key with other keys. """
-    pass
-    return
-
-### -----------------------------------------------------------------------
-
-
-
-### ----- Super key methods -----------------------------------------------
-
-def typeSuperKey( amount = 1 ):
-    """ Use xdotool to type the super key a certain amount of times. """
-    pass
-    return
-
-
-
-def holdSuperKey():
-    """ Use xdotool to hold down the super key. """
-    pass
-    return
-
-
-
-def releaseSuperKey():
-    """ Use xdotool to release the super key. """
-    pass
-    return
-
-
-
-def combineSuperKey( key = '' ):
-    """ Use xdotool to combine the super key with other keys. """
-    pass
-    return
-
-### -----------------------------------------------------------------------
