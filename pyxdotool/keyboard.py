@@ -193,13 +193,6 @@ specialKeys = {
         'Up':       'Up' ,
         }
 
-# Key actions list
-keyActions = [ 
-        'type' ,
-        'hold' ,
-        'release' ,
-        'combine' ,
-        ]
 
 #  Automatically build functions for special keys
 for function in specialKeys:
